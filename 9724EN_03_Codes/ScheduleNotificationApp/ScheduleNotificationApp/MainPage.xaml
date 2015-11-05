@@ -1,0 +1,76 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="ScheduleNotificationApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="Notification" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
+            <TextBlock Text="Schedule a notification" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <RadioButton x:Name="rbAlarm" GroupName="type" Content="Alarm" Grid.Column="0" Checked="RadioButton_Checked" />
+            <RadioButton x:Name="rbReminder" GroupName="type" Content="Reminder" Grid.Column="1" Checked="RadioButton_Checked" />
+
+            <TextBlock Text="Name" Grid.Row="1"  Grid.Column="0" />
+            <TextBox  x:Name="txtName" Grid.Row="1"  Grid.Column="1" />
+            <TextBlock Text="Title" Grid.Row="2"  Grid.Column="0" />
+            <TextBox  x:Name="txtTitle" Grid.Row="2"  Grid.Column="1" />
+            <TextBlock Text="Content" Grid.Row="3"  Grid.Column="0" />
+            <TextBox  x:Name="txtContent" Grid.Row="3"  Grid.Column="1" AcceptsReturn="True" />
+            <TextBlock Text="Begin Time" Grid.Row="4"  Grid.Column="0" />
+            <StackPanel Orientation="Horizontal" Grid.Row="4"  Grid.Column="1" >
+                <toolkit:DatePicker x:Name="dtBegindate" />
+                <toolkit:TimePicker x:Name="dtBegintime"/>
+            </StackPanel>
+            
+            <TextBlock Text="Expiration" Grid.Row="5"  Grid.Column="0" />
+            <StackPanel Orientation="Horizontal" Grid.Row="5"  Grid.Column="1" >
+                <toolkit:DatePicker x:Name="dtExpdate" />
+                <toolkit:TimePicker x:Name="dtExptime"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar>
+            <shell:ApplicationBarIconButton x:Name="btnAddNotification" Click="btnAddNotification_Click" Text="Add"
+                                            IconUri="/Assets/edit.png"/>
+            <shell:ApplicationBarIconButton x:Name="btnCancel" Click="btnCancel_Click"  Text="Cancel"
+                                            IconUri="/Assets/cancel.png"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>

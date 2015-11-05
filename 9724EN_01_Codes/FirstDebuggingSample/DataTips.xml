@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Tips version="dev10+">
+  <PinnedTip>
+    <InnerTip identity.Moniker="c:\users\buildfusion\documents\visual studio 2012\Projects\FirstDebuggingSample\FirstDebuggingSample\TestClass.cs" 
+              identity.Position="564" 
+              watchItemCount="1" 
+              watchItem0="end" 
+              comments="The value that identifies the end of the loop" 
+              showingComments="true" 
+              uniqueIdentity="{56a6c358-eb45-45e2-9bf6-0e48510ce79c}" />
+    <UnopenedState PinnedPosition="590" Length="0" 
+                   XOffset="201" 
+                   RelativeFileName="FirstDebuggingSample\TestClass.cs" 
+                   AbsoluteFileName="c:\users\buildfusion\documents\visual studio 2012\Projects\FirstDebuggingSample\FirstDebuggingSample\TestClass.cs" />
+  </PinnedTip>
+</Tips>

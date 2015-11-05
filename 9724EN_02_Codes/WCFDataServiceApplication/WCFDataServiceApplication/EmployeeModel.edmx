@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OdataDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="OdataDbModelStoreContainer">
+          <EntitySet Name="Address" EntityType="OdataDbModel.Store.Address" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Department" EntityType="OdataDbModel.Store.Department" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Emp" EntityType="OdataDbModel.Store.Emp" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Emp_Address" Association="OdataDbModel.Store.FK_Emp_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Emp" EntitySet="Emp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Department" Association="OdataDbModel.Store.FK_Emp_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Emp" EntitySet="Emp" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="int" Nullable="false" />
+          <Property Name="StreetName" Type="nvarchar" MaxLength="200" />
+          <Property Name="BuildingNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="DepartmentName" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Emp">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="AddressId" Type="int" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Emp_Address">
+          <End Role="Address" Type="OdataDbModel.Store.Address" Multiplicity="0..1" />
+          <End Role="Emp" Type="OdataDbModel.Store.Emp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="Emp">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Department">
+          <End Role="Department" Type="OdataDbModel.Store.Department" Multiplicity="0..1" />
+          <End Role="Emp" Type="OdataDbModel.Store.Emp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Emp">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OdataDbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="OdataDbEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="OdataDbModel.Address" />
+          <EntitySet Name="Departments" EntityType="OdataDbModel.Department" />
+          <EntitySet Name="Emps" EntityType="OdataDbModel.Emp" />
+          <AssociationSet Name="FK_Emp_Address" Association="OdataDbModel.FK_Emp_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Emp" EntitySet="Emps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Emp_Department" Association="OdataDbModel.FK_Emp_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Emp" EntitySet="Emps" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressId" />
+          </Key>
+          <Property Name="AddressId" Type="Int32" Nullable="false" />
+          <Property Name="StreetName" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="BuildingNo" Type="Int32" />
+          <NavigationProperty Name="Emps" Relationship="OdataDbModel.FK_Emp_Address" FromRole="Address" ToRole="Emp" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentName" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Emps" Relationship="OdataDbModel.FK_Emp_Department" FromRole="Department" ToRole="Emp" />
+        </EntityType>
+        <EntityType Name="Emp">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="AddressId" Type="Int32" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Address" Relationship="OdataDbModel.FK_Emp_Address" FromRole="Emp" ToRole="Address" />
+          <NavigationProperty Name="Department" Relationship="OdataDbModel.FK_Emp_Department" FromRole="Emp" ToRole="Department" />
+        </EntityType>
+        <Association Name="FK_Emp_Address">
+          <End Role="Address" Type="OdataDbModel.Address" Multiplicity="0..1" />
+          <End Role="Emp" Type="OdataDbModel.Emp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="AddressId" />
+            </Principal>
+            <Dependent Role="Emp">
+              <PropertyRef Name="AddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Emp_Department">
+          <End Role="Department" Type="OdataDbModel.Department" Multiplicity="0..1" />
+          <End Role="Emp" Type="OdataDbModel.Emp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Emp">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OdataDbModelStoreContainer" CdmEntityContainer="OdataDbEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="OdataDbModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="StreetName" ColumnName="StreetName" />
+                <ScalarProperty Name="BuildingNo" ColumnName="BuildingNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="OdataDbModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emps">
+            <EntityTypeMapping TypeName="OdataDbModel.Emp">
+              <MappingFragment StoreEntitySet="Emp">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="AddressId" ColumnName="AddressId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

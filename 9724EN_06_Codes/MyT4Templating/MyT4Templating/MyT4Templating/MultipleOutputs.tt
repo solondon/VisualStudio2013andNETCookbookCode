@@ -1,0 +1,10 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".txt" #>
+<#@ include file="FileManager.tt" #>
+
+<#
+	Write("File1");
+	CreateFile("1.txt"); 
+	Write("File2");
+	CreateFile("2.txt");
+#>

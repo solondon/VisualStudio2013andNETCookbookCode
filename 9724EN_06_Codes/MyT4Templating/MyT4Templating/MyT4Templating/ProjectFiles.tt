@@ -1,0 +1,35 @@
+﻿<#
+   var logVariants = new []
+       {
+           new { Variant = "Bright"    , Color = "White"   },
+           new { Variant = "Normal"    , Color = "Gray"    },
+           new { Variant = "Url"       , Color = "Cyan"    },
+       };
+#>
+   using System;
+
+    static partial class MyLogClass
+    {
+<#
+   foreach (var logVariant in logVariants)
+   {
+#>
+       static void Write<#=logVariant.Variant#>Line (string message)
+       {
+           var color = Console.ForegroundColor;
+           Console.ForegroundColor = ConsoleColor.<#=logVariant.Color#>;
+           try
+           {
+               Console.WriteLine (message ?? "");
+           }
+           finally
+           {
+               Console.ForegroundColor = color;
+           }
+       }
+
+<#
+	}
+#>
+       
+}

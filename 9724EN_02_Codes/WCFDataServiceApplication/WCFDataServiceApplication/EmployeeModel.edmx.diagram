@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="076a09bd0801492e9ee818857f36dc32" Name="Diagram1">
+        <EntityTypeShape EntityType="OdataDbModel.Address" Width="1.5" PointX="0.875" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OdataDbModel.Department" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OdataDbModel.Emp" Width="1.5" PointX="3.25" PointY="2" IsExpanded="true" />
+        <AssociationConnector Association="OdataDbModel.FK_Emp_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="OdataDbModel.FK_Emp_Department" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
